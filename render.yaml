@@ -3,7 +3,7 @@ services:
   - type: web
     runtime: python
     name: sentinel-backend
-    repo: https://github.com/AASTHA381/sentinel-travel-risk-lab
+    repo: https://github.com/karan68/sentinel-travel-risk-lab
     branch: main
     rootDir: backend
     buildCommand: pip install -r requirements.txt
@@ -21,7 +21,7 @@ services:
   - type: web
     runtime: static
     name: sentinel-frontend
-    repo: https://github.com/AASTHA381/sentinel-travel-risk-lab
+    repo: https://github.com/karan68/sentinel-travel-risk-lab
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build

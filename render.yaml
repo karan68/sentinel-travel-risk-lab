@@ -5,6 +5,7 @@ services:
     name: sentinel-backend
     repo: https://github.com/karan68/sentinel-travel-risk-lab
     branch: main
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT

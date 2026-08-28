@@ -37,7 +37,7 @@ def test_low_risk_booking_is_approved() -> None:
     result = response.json()
     assert result["decision"] == "approve"
     assert result["overall_score"] < 0.35
-    assert result["engine_mode"] in {"rules_only_untrained", "hybrid_gradient_boosting_rules"}
+    assert result["engine_mode"] in {"rules_only_untrained", "hybrid_xgboost_rules"}
 
 
 def test_multiple_payment_signals_require_review() -> None:

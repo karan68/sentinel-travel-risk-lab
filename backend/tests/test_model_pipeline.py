@@ -29,8 +29,8 @@ def test_saved_metadata_matches_artifacts() -> None:
     assert metadata["seed"] == SEED
     assert metadata["row_count"] == 15_000
     assert metadata["features"] == MODEL_FEATURES
-    assert (ARTIFACTS / "payment_fraud_model.joblib").stat().st_size > 0
-    assert (ARTIFACTS / "inventory_abuse_model.joblib").stat().st_size > 0
+    assert (ARTIFACTS / "payment_fraud_model.json").stat().st_size > 0
+    assert (ARTIFACTS / "inventory_abuse_model.json").stat().st_size > 0
 
 
 def test_reported_metrics_are_bounded_and_confusion_counts_match_test_size() -> None:

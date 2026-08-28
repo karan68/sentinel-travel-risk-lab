@@ -116,7 +116,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--teal); outl
 .evidence-list { padding: 16px 20px; }
 .evidence-row { min-height: 44px; display: grid; grid-template-columns: 8px 1fr auto; align-items: center; gap: 9px; border-top: 1px solid #e5e8e3; font-size: 11px; }
 .source-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
-.source-model_feature_importance { background: var(--violet); }
+.source-xgboost_shap { background: var(--violet); }
 .source-telemetry { background: var(--teal); }
 .evidence-row div { display: flex; flex-direction: column; gap: 2px; }
 .evidence-row div strong { font-weight: 550; }

@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.141-green?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://reactjs.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.7-orange)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-3.4-orange)](https://xgboost.readthedocs.io/)
 [![License](https://img.shields.io/badge/License-Research_Prototype-lightgrey)](LICENSE)
 
 ---
@@ -17,7 +17,7 @@ Sentinel is a full-stack research prototype that screens travel-agent bookings f
 1. **Payment Fraud** — Use of a compromised payment token or stolen credentials
 2. **Inventory Abuse** — Repeated bulk holds followed by late cancellations
 
-It combines gradient-boosted tree predictions, transparent policy rules, form-interaction telemetry, a relationship graph, and an optional Gemini AI analyst brief. It recommends **Approve**, **Manual Review**, or **Block** — but does not make autonomous production decisions.
+It combines XGBoost predictions, transparent policy rules, form-interaction telemetry, a relationship graph, and an optional Gemini AI analyst brief. It recommends **Approve**, **Manual Review**, or **Block** — but does not make autonomous production decisions.
 
 > **Evidence boundary:** The included 15,000-row dataset is synthetic and reproducibly generated (seed `20260823`). Reported metrics verify implementation on generated patterns; they are not claims about real travel-industry performance.
 
@@ -29,8 +29,8 @@ It combines gradient-boosted tree predictions, transparent policy rules, form-in
 flowchart LR
     UI[React analyst workbench] --> API[FastAPI]
     API --> FE[Feature calculation]
-    FE --> PM[Payment Gradient Boosting]
-    FE --> IM[Inventory Gradient Boosting]
+    FE --> PM[Payment XGBoost]
+    FE --> IM[Inventory XGBoost]
     FE --> RULES[Policy rules]
     UI --> TEL[Shop Assistant telemetry]
     TEL --> API
@@ -48,7 +48,7 @@ flowchart LR
 
 | Module | Description |
 |---|---|
-| 🔐 **Gatekeeper** | Separate payment-fraud and inventory-abuse Gradient Boosting models + auditable policy guardrails |
+| 🔐 **Gatekeeper** | Separate payment-fraud and inventory-abuse XGBoost models + auditable policy guardrails |
 | 📋 **Shop Assistant** | Optional live capture of elapsed form time, paste count, and pointer events |
 | 🔍 **Detective** | Interactive entity relationship graph — offline demo or live Neo4j |
 | 🤖 **Analyst Assistant** | Evidence-only local brief + optional Gemini generation (no PII sent) |
@@ -61,10 +61,10 @@ flowchart LR
 
 | Model | Precision | Recall | PR-AUC | False-Positive Rate |
 |---|---:|---:|---:|---:|
-| Payment Fraud | 0.7973 | 0.4126 | 0.5005 | 0.0072 |
-| Inventory Abuse | 0.8387 | 0.6240 | 0.6614 | 0.0152 |
+| Payment Fraud | 0.7571 | 0.3706 | 0.4858 | 0.0082 |
+| Inventory Abuse | 0.8229 | 0.6320 | 0.6714 | 0.0172 |
 
-> Metrics were regenerated after switching from XGBoost to scikit-learn's GradientBoostingClassifier (smaller dependency footprint for free-tier hosting). The payment model still misses many generated fraud cases at threshold `0.50`; this limitation is intentionally visible in the application.
+> The payment model misses many generated fraud cases at threshold `0.50`. This limitation is intentionally visible in the application.
 
 ---
 
@@ -73,6 +73,7 @@ flowchart LR
 - Python 3.11+
 - Node.js 20+
 - npm 10+
+- macOS: `brew install libomp` (required for XGBoost)
 
 ---
 
@@ -134,7 +135,7 @@ sentinel-travel-risk-lab/
 ├── backend/
 │   ├── app/              # FastAPI application
 │   │   ├── main.py       # API routes & WebSocket
-│   │   ├── model_service.py  # Gradient Boosting model loading
+│   │   ├── model_service.py  # XGBoost model loading
 │   │   ├── features.py   # Feature engineering
 │   │   ├── risk.py       # Risk scoring & policy rules
 │   │   ├── detective.py  # Graph relationship provider
